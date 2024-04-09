@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cstdlib> //rand()
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    const int SIZE = 10;
+    int arr[SIZE];
+    int minValue, maxValue, value;
+    int sum = 0;
+    cout << "Введите минимальное значение диапазона: ";
+    cin >> minValue;
+    cout << "Введите максимальное значение диапазона: ";
+    cin >> maxValue;
+    cout << "Введите значение для поиска: ";
+    cin >> value;
+    for (int i = 0; i < SIZE; i++)
+    {
+        arr[i] = minValue + rand() % (maxValue - minValue + 1);
+    }
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (arr[i] < value)
+        {
+            sum += arr[i];
+        }
+    }
+    cout << "Сумма элементов, значения которых меньше " << value << ": " << sum << endl;
+}
