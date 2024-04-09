@@ -1,0 +1,33 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr3d = new int[10];
+            Random rand = new Random();
+            for(int i =0; i < 10; i++)
+            {
+                arr3d[i] = rand.Next(40);
+                Console.Write(arr3d[i] + " ");
+            }
+            long sum = 0;
+            int min = arr3d[0], max = arr3d[0];
+            foreach (int j in arr3d)
+            {
+                sum = sum + j;
+                if(j > max)
+                {
+                    max = j;
+                }
+                else if(j < min)
+                {
+                    min = j;
+                }
+            }
+            Console.WriteLine("\n" + "sum = " + sum+ "\n" + "min = " + min + "\n" + "max = "+ max);
+        }
+    }
+}
