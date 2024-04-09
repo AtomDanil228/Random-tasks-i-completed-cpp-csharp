@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+class overcoat {
+private:
+    string coats[6] = { "арктика", "горизонт", "горизонт", "тропик", "ураган", "элеганс" };
+    int prices[6] = { 29, 39, 39, 49, 59, 131 };
+public:
+    int isSameType(int choice1, int choice2) {
+        if (coats[choice1--] == coats[choice2--])
+            return true;
+        else
+            return false;
+    }
+    int isSamePrice(int choice1, int choice2) {
+        if (prices[choice1--] == prices[choice2--])
+            return true;
+        else
+            return false;
+    }
+    void setObject(int choice1, int choice2) {
+        coats[choice1] = coats[choice2];
+        cout << "Операция присваивания выполнена успешно.\n";
+    }
+};
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    overcoat coat;
+    for (bool end = 0; end == false;) {
+        cout << "Что хотите сделать?\n1 - проверить равенство типов одежды\n2 - Операция присваивания одного объекта в другой\n3 - Сравнение одежды по цене\n4 - Выход\n\n";
+        int choice2 = 0;
+        int choice3 = 0;
+        int choice4 = 0;
+        cin >> choice2;
+        if (choice2 > 0 || choice2 < 4) {
+            switch (choice2) {
+            case 1:
+                cout << "Выберите каких 2 пальта хотите сравнить (1-6)\n";
+                cin >> choice3 >> choice4;
+                if (choice3 > 0 || choice3 < 7 || choice4 > 0 || choice4 < 7) {
+                    if (coat.isSameType(choice3, choice4) == true)
+                        cout << "Одежда совпадает!\n";
+                    else
+                        cout << "Одежда не совпадает.\n";
+                }
+                else
+                    cout << "Ошибка!\n";
+                break;
+            case 2:
+                cout << "Выберите какое пальто хотите заменить с каким (1-6)\n";
+                cin >> choice3 >> choice4;
+                if (choice3 > 0 || choice3 < 7 || choice4 > 0 || choice4 < 7) {
+                    coat.setObject(choice3, choice4);
+                }
+                else
+                    cout << "Ошибка!\n";
+                break;
+            case 3:
+                cout << "Выберите каких 2 пальта хотите сравнить (1-6)\n";
+                cin >> choice3 >> choice4;
+                if (choice3 > 0 || choice3 < 7 || choice4 > 0 || choice4 < 7) {
+                    if (coat.isSamePrice(choice3,choice4) == true)
+                        cout << "Цены совпадают!\n";
+                    else
+                        cout << "Цены не совпадают.\n";
+                }
+                else
+                    cout << "Ошибка!\n";
+                break;
+            }
+        }
+        else if (choice2 == 4) {
+            cout << "Выход...\n";
+            end = 1;
+        }
+        else {
+            cout << "Ошибка!\n";
+        }
+    }
+}
