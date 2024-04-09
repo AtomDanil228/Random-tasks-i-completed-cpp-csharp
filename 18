@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    const int COUNT = 7;
+    int nums[COUNT];
+    std::cout << "Введите " << COUNT << " целых чисел: ";
+    for (int i = 0; i < COUNT; i++) {
+        std::cin >> nums[i];
+    }
+
+    int max_num = nums[0];
+    for (int i = 1; i < COUNT; i++) {
+        if (nums[i] > max_num) {
+            max_num = nums[i];
+        }
+    }
+
+    std::cout << "Максимальное число: " << max_num << "\n";
+
+    return 0;
+}
