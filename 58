@@ -1,0 +1,139 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Person {
+private:
+    char* fullName;
+public:
+    Person(const char* name) {
+        fullName = new char[strlen(name) + 1];
+        strcpy_s(fullName, strlen(name) + 1, name);
+    }
+    Person(const Person& other) {
+        fullName = new char[strlen(other.fullName) + 1];
+        strcpy_s(fullName, strlen(other.fullName) + 1, other.fullName);
+    }
+    Person() {
+        fullName = nullptr;
+    }
+    ~Person() {
+        delete[] fullName;
+    }
+    const char* getFullName() const {
+        return fullName;
+    }
+    Person& operator=(const Person& other) {
+        if (this != &other) {
+            delete[] fullName;
+            fullName = new char[strlen(other.fullName) + 1];
+            strcpy_s(fullName, strlen(other.fullName) + 1, other.fullName);
+        }
+        return *this;
+    }
+};
+class Apartment {
+private:
+    Person* residents;
+    int numOfResidents;
+public:
+    Apartment(int capacity) {
+        residents = new Person[capacity];
+        numOfResidents = 0;
+    }
+    Apartment() {
+        residents = nullptr;
+        numOfResidents = 0;
+    }
+    Apartment(const Apartment& other) {
+        residents = new Person[other.numOfResidents];
+        numOfResidents = other.numOfResidents;
+
+        for (int i = 0; i < numOfResidents; i++) {
+            residents[i] = other.residents[i];
+        }
+    }
+    ~Apartment() {
+        delete[] residents;
+    }
+    void addResident(const char* name) {
+        residents[numOfResidents] = Person(name);
+        numOfResidents++;
+    }
+    void printResidents() const {
+        for (int i = 0; i < numOfResidents; i++) {
+            cout << residents[i].getFullName() << endl;
+        }
+    }
+    Apartment& operator=(const Apartment& other) {
+        if (this != &other) {
+            delete[] residents;
+            residents = new Person[other.numOfResidents];
+            numOfResidents = other.numOfResidents;
+
+            for (int i = 0; i < numOfResidents; i++) {
+                residents[i] = other.residents[i];
+            }
+        }
+        return *this;
+    }
+};
+class House {
+private:
+    Apartment* apartments;
+    int numOfApartments;
+public:
+    House(int capacity) {
+        apartments = new Apartment[capacity];
+        numOfApartments = 0;
+    }
+    House(const House& other) {
+        apartments = new Apartment[other.numOfApartments];
+        numOfApartments = other.numOfApartments;
+
+        for (int i = 0; i < numOfApartments; i++) {
+            apartments[i] = other.apartments[i];
+        }
+    }
+    ~House() {
+        delete[] apartments;
+    }
+    void addApartment(const Apartment& apartment) {
+        apartments[numOfApartments] = apartment;
+        numOfApartments++;
+    }
+    void printApartments() const {
+        for (int i = 0; i < numOfApartments; i++) {
+            cout << "Apartment " << i + 1 << ":" << endl;
+            apartments[i].printResidents();
+            cout << endl;
+        }
+    }
+    House& operator=(const House& other) {
+        if (this != &other) {
+            delete[] apartments;
+            apartments = new Apartment[other.numOfApartments];
+            numOfApartments = other.numOfApartments;
+
+            for (int i = 0; i < numOfApartments; i++) {
+                apartments[i] = other.apartments[i];
+            }
+        }
+        return *this;
+    }
+};
+int main() {
+    House house(3);
+    Apartment apartment1(2);
+    apartment1.addResident("John Smith");
+    apartment1.addResident("Jane Doe");
+    Apartment apartment2(1);
+    apartment2.addResident("Alice Johnson");
+    Apartment apartment3(3);
+    apartment3.addResident("Bob Brown");
+    apartment3.addResident("Emily Davis");
+    apartment3.addResident("Michael Wilson");
+    house.addApartment(apartment1);
+    house.addApartment(apartment2);
+    house.addApartment(apartment3);
+    house.printApartments();
+}
