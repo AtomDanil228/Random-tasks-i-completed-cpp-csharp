@@ -1,0 +1,141 @@
+#include <iostream>
+#include <windows.h>
+#include <vector>
+
+using namespace std;
+
+struct Product
+{
+    string name;
+    float price;
+    float code;
+};
+
+struct Order
+{
+    Product product;
+    int amount;
+    float sum;
+};
+
+void menu(vector<Product> pizza, vector<Product> drinks)
+{
+    cout << "~~~~~~~~~~ Пица у Адольфа ~~~~~~~~~~\n" << endl;
+    cout << "...............Меню..............." << endl;
+
+    cout << "Пиццы:\t\t\tЦена\tКод" << endl;
+    for(int i = 0; i < pizza.size(); i++)
+    cout << "\t" << i + 1 << ") " << pizza[i].name << "\t" << pizza[i].price << "$\t" << pizza[i].code << endl;
+
+    cout << "\nНапитки:" << endl;
+    for(int i = 0; i < drinks.size(); i++)
+    cout << "\t" << i + 1 << ") " << drinks[i].name << "\t" << drinks[i].price << "$\t" << drinks[i].code << endl;
+}
+
+
+void check(vector<Order> order, float total_sum)
+{
+    cout << ".......... Чек ...........\n" <<endl;
+    cout << "\t\t\tЦена" << endl;
+
+    for(int i = 0; i < order.size(); i++)
+        cout << order[i].product.name << "\t" << order[i].amount << "\t" << order[i].sum << endl;
+
+    cout << "\nОбщая стоимось:\t\t" << total_sum;
+}
+
+int main()
+{ 
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
+
+    
+    vector<Product> pizza = {{"Пеперони", 12, 10}, {"BBQ", 14, 11}, {"4 Сыра", 300, 12}, {"Говно", 400, 13}};
+    vector<Product> drinks = {{"Пепаси 0.5л", 2, 20}, {"Кола 1л", 5, 21}, {"Спирт", 8, 22}};
+
+
+    vector<Order> order;
+
+    while(1)
+    {
+        system("cls");
+        menu(pizza, drinks);
+
+        int c;
+        int a;
+
+        cout << "\nВведите код (9 для завершения заказа): ";
+        cin >> c;
+        
+        if(c == 9)
+            break;
+        else
+        {
+            cout << "Введите количество: ";
+            cin >> a;
+
+            if(c / 10 == 1)
+            {
+                Order m;
+
+                m.product = pizza[c % 10];
+                m.amount = a;
+                m.sum = a * pizza[c % 10].price;
+
+                order.push_back(m);
+            }
+            else if(c / 10 == 2)
+            {
+                Order m;
+                
+                m.product = drinks[c % 10];
+                m.amount = a;
+                m.sum = a * drinks[c % 10].price;
+
+                order.push_back(m);
+            } 
+        }
+    }
+
+    system("cls");
+    int pizza_amount = 1;
+    int drinks_amount = 0;
+    float total_sum = 0;
+
+    for(int i = 0; i < order.size(); i++) // стоимость без скидок
+    {
+        total_sum += order[i].sum;
+
+        if(order[i].product.code / 10 == 2 && order[i].product.price > 2)
+            drinks_amount += order[i].amount;
+    }
+
+    for(int i = 0; i < order.size(); i++) // cкидки
+    {   
+        if(total_sum > 50 && order[i].product.code / 10 == 1)  // скидки на пиццы
+        {   
+            for(int k = 0; k < order[i].amount; k++)
+            {
+                if(pizza_amount % 5 == 0)
+                {
+                    order[i].sum -= order[i].product.price;
+                    pizza_amount = 1;
+                }
+                else
+                    pizza_amount++;           
+            }
+            cout << endl;
+        }
+        if(order[i].product.code / 10 == 2 && order[i].product.price > 2 && drinks_amount > 3) //скидки на пиво
+            order[i].sum *= 0.85;
+    }
+
+    total_sum = 0;
+    for(int i = 0; i < order.size(); i++)
+        total_sum += order[i].sum;
+
+
+    check(order, total_sum);
+
+    return 0;
+}
