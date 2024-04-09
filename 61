@@ -1,0 +1,129 @@
+#include <iostream>
+#include <cstdlib>
+#include <windows.h>
+using namespace std;
+
+class Fight {
+private:
+    int PlayerHP = 100;
+    int EnemyHP = 100;
+    int PlayerStamina = 200;
+    int EnemyStamina = 200;
+public:
+    //Сеттеры
+    int getPlayerHP() { return(PlayerHP); }
+    int getEnemyHP() { return(EnemyHP); }
+    int getPlayerStamina() { return(PlayerStamina); }
+    int getEnemyStamina() { return(EnemyStamina); }
+    //Геттеры
+    void setPlayerHP(int num) { PlayerHP = num; }
+    void setEnemyHP(int num) { EnemyHP = num; }
+    void setPlayerStamina(int num) { PlayerStamina = num; }
+    void setEnemyStamina(int num) { EnemyStamina = num; }
+};
+
+int randomNumber(int min, int max) {
+    int randomNumber = 0;
+    return(randomNumber = min + rand() % (max - min + 1));
+}
+// 1 = Player, 2 = Enemy;
+int strongAttack(Fight& fight) {
+    int damage = randomNumber(18, 28);
+    return damage;
+}
+int weakAttack(Fight& fight) {
+    int damage = randomNumber(7, 14);
+    return damage;
+}
+
+int main()
+{
+    int i = 0;
+    Fight fight;
+    srand(time(NULL));
+    setlocale(LC_ALL, "rus");
+    for (int end = 0;end < 1;) {
+        cout << "Здоровье врага = " << fight.getEnemyHP() << "\nВаше здоровье = " << fight.getPlayerHP() << endl << "Энергия врага = " << fight.getEnemyStamina() << "\nВаша энергия = " << fight.getPlayerStamina() << endl << endl;
+        int attackChoice = 0, fail = 0;
+        cout << "1 - Слабая атака\t\t\t2 - Сильная атака\t\t3 - Пропустить ход\nСредний урон = 10\t\t\tСредний урон = 23\nПотребление энергии = 30\t\tПотребление энергии = 70\n\nВведите число.\n";
+        cin >> attackChoice;
+        if (attackChoice == 1 and fight.getPlayerStamina() > 30 and fight.getEnemyHP() > 0) {
+            Sleep(1000);
+            int attack = weakAttack(fight);
+            int playerStamina = fight.getPlayerStamina();
+            fight.setPlayerStamina(playerStamina - 30);
+            int EnemyHP = fight.getEnemyHP();
+            fight.setEnemyHP(EnemyHP - attack);
+            cout << "\nВы нанесли " << attack << " Урона!\n\n\n\n\n";
+            Sleep(600);
+        }
+        else if (attackChoice == 2 and fight.getPlayerStamina() > 70 and fight.getEnemyHP() > 0) {
+            Sleep(1000);
+            int attack = strongAttack(fight);
+            int playerStamina = fight.getPlayerStamina();
+            fight.setPlayerStamina(playerStamina - 70);
+            int EnemyHP = fight.getEnemyHP();
+            fight.setEnemyHP(EnemyHP - attack);
+            cout << "\nВы нанесли " << attack << " Урона!\n\n\n\n\n";
+            Sleep(600);
+        }
+        else if (attackChoice == 3 and fight.getEnemyHP() > 0) {
+            cout << "\nВы пропустили ход.\n";
+        }
+        else if (attackChoice == 1 and fight.getPlayerStamina() < 30 or fight.getEnemyHP() < 0) {
+            fail++;
+        }
+        else if (attackChoice == 2 and fight.getPlayerStamina() < 70 or fight.getEnemyHP() < 0) {
+            fail++;
+        }
+        if (i > 1 and fail == 0) {
+            Sleep(200);
+            int restoreStamina = fight.getPlayerStamina();
+            fight.setPlayerStamina(restoreStamina + 25);
+            cout << "Вы восстановили 25 энергии.\n\n";
+            i = 0;
+            Sleep(900);
+        } if (fail == 0) {
+            int EnemyAttack = randomNumber(1, 2);
+            if (EnemyAttack == 1 and fight.getEnemyStamina() > 30 and fight.getEnemyHP() > 0) {
+                Sleep(1000);
+                int attack = weakAttack(fight);
+                int EnemyStamina = fight.getEnemyStamina();
+                fight.setEnemyStamina(EnemyStamina - 30);
+                int PlayerHP = fight.getPlayerHP();
+                fight.setPlayerHP(PlayerHP - attack);
+                cout << "\nВам нанесли " << attack << " Урона!\n\n\n\n\n";
+                Sleep(600);
+            } else if (EnemyAttack == 2 and fight.getEnemyStamina() > 70 and fight.getEnemyHP() > 0) {
+                Sleep(1000);
+                int attack = strongAttack(fight);
+                int EnemyStamina = fight.getEnemyStamina();
+                fight.setEnemyStamina(EnemyStamina - 70);
+                int PlayerHP = fight.getPlayerHP();
+                fight.setPlayerHP(PlayerHP - attack);
+                cout << "\nВам нанесли " << attack << " Урона!\n\n\n\n\n";
+                Sleep(600);
+            }
+            else if (EnemyAttack == 2 and fight.getEnemyStamina() < 70 and fight.getEnemyStamina() > 30) {
+                Sleep(1000);
+                int attack = weakAttack(fight);
+                int EnemyStamina = fight.getEnemyStamina();
+                fight.setEnemyStamina(EnemyStamina - 30);
+                int PlayerHP = fight.getPlayerHP();
+                fight.setPlayerHP(PlayerHP - attack);
+                cout << "\nВам нанесли " << attack << " Урона!\n\n\n\n\n";
+                Sleep(600);
+            }
+            else if (fight.getEnemyStamina() < 30) {
+                Sleep(300);
+                cout << "\nПротивник пропускает ход!\n";
+                Sleep(500);
+            } if (fight.getEnemyHP() < 0) {
+                cout << "\n\n\n\n\tВы победили!\n"; end = 1;
+            } if (fight.getPlayerHP() < 0) {
+                cout << "\n\n\n\n\tВы проиграли!\n"; end = 1;
+            }
+            i++;
+        } fail = 0;
+    };
+}
