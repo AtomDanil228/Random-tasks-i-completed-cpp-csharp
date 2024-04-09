@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    const int MONTHS = 12;
+    double profits[MONTHS];
+    int start, end;
+    double maxProfit = 0, minProfit = 0;
+    int maxMonth = 0, minMonth = 0;
+    for (int i = 0; i < MONTHS; i++)
+    {
+        cout << "Введите прибыль за " << i + 1 << "-й месяц: ";
+        cin >> profits[i];
+    }
+    cout << "Введите начало диапазона (1-12): "; cin >> start;
+    cout << "Введите конец диапазона (1-12): ";  cin >> end;
+    if (start < 1 || end > 12 || start > end)
+    {
+        cout << "Некорректный диапазон" << endl;
+        return 0;
+    }
+    maxProfit = profits[start - 1];
+    minProfit = profits[start - 1];
+    for (int i = start - 1; i < end; i++)
+    {
+        if (profits[i] > maxProfit)
+        {
+            maxProfit = profits[i];
+            maxMonth = i + 1;
+        }
+        if (profits[i] < minProfit)
+        {
+            minProfit = profits[i];
+            minMonth = i + 1;
+        }
+    } cout << "Месяц с максимальной прибылью: " << maxMonth << endl;
+    cout << "Месяц с минимальной прибылью: " << minMonth << endl;
+}
