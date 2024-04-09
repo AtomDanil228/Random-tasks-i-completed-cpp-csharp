@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Reservoir {
+private:
+    string name;
+    double width;
+    double length;
+    double maxDepth;
+public:
+    Reservoir() : width(0.0), length(0.0), maxDepth(0.0) {}
+    Reservoir(const string& name, double width, double length, double maxDepth)
+        : name(name), width(width), length(length), maxDepth(maxDepth) {}
+    ~Reservoir() {}
+    double calculateVolume() const {
+        return width * length * maxDepth;
+    }
+    double calculateSurfaceArea() const {
+        return width * length;
+    }
+    bool isSameType(const Reservoir& other) const {
+        return name == other.name;
+    }
+    bool operator==(const Reservoir& other) const {
+        return calculateSurfaceArea() == other.calculateSurfaceArea();
+    }
+    Reservoir(const Reservoir& other)
+        : name(other.name), width(other.width), length(other.length), maxDepth(other.maxDepth) {}
+    Reservoir& operator=(const Reservoir& other) {
+        if (this != &other) {
+            name = other.name;
+            width = other.width;
+            length = other.length;
+            maxDepth = other.maxDepth;
+        }
+        return *this;
+    }
+
+    void setName(const string& newName) {
+        name = newName;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    void setWidth(double newWidth) {
+        width = newWidth;
+    }
+
+    double getWidth() const {
+        return width;
+    }
+
+    void setLength(double newLength) {
+        length = newLength;
+    }
+
+    double getLength() const {
+        return length;
+    }
+
+    void setMaxDepth(double newMaxDepth) {
+        maxDepth = newMaxDepth;
+    }
+
+    double getMaxDepth() const {
+        return maxDepth;
+    }
+};
+
+int main() {
+    const int initialCapacity = 5;
+    Reservoir* reservoirs = new Reservoir[initialCapacity]; // Создание динамического массива объектов класса
+    int numReservoirs = 0; // Количество водоемов
+
+    // Инициализация объектов
+    reservoirs[0] = Reservoir("Lake", 100.0, 200.0, 10.0);
+    reservoirs[1] = Reservoir("Sea", 500.0, 1000.0, 50.0);
+    reservoirs[2] = Reservoir("Pond", 20.0, 30.0, 5.0);
+    reservoirs[3] = Reservoir("Swimming Pool", 10.0, 20.0, 3.0);
+    reservoirs[4] = Reservoir("River", 200.0, 500.0, 20.0);
+    numReservoirs = 5;
+
+    // Добавление нового водоема
+    Reservoir newReservoir("Reservoir", 300.0, 400.0, 15.0);
+    Reservoir* tempReservoirs = new Reservoir[numReservoirs + 1];
+    for (int i = 0; i < numReservoirs; i++) {
+        tempReservoirs[i] = reservoirs[i];
+    }
+    tempReservoirs[numReservoirs] = newReservoir;
+    delete[] reservoirs;
+    reservoirs = tempReservoirs;
+    numReservoirs++;
+
+    // Удаление водоема
+    numReservoirs--;
+    Reservoir* tempReservoirs2 = new Reservoir[numReservoirs];
+    for (int i = 0; i < numReservoirs; i++) {
+        tempReservoirs2[i] = reservoirs[i];
+    }
+    delete[] reservoirs;
+    reservoirs = tempReservoirs2;
+
+    // Проверка работоспособности
+    for (int i = 0; i < numReservoirs; i++) {
+        cout << "Reservoir " << i + 1 << ":" << endl;
+        cout << "Name: " << reservoirs[i].getName() << endl;
+        cout << "Volume: " << reservoirs[i].calculateVolume() << endl;
+        cout << "Surface Area: " << reservoirs[i].calculateSurfaceArea() << endl;
+        cout << endl;
+    }
+
+    delete[] reservoirs;
+
+    return 0;
+}
