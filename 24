@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int main(){
+    setlocale(LC_ALL, "rus");
+    int x, y;
+    cout << "Введите число x: ";
+    cin >> x;
+    cout << "Введите степень y: ";
+    cin >> y;
+
+    int result = 1;
+    for (int i = 0; i < y; ++i) {
+        result *= x;
+    }
+
+    cout << x << " в степени " << y << " равно " << result << endl;
+}
