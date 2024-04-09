@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX_MOVIES = 100; // максимальное количество фильмов в магазине
+
+struct Movie {
+    string title;
+    string director;
+    string genre;
+    int rating;
+    float price;
+};
+
+int main() {
+    Movie movies[MAX_MOVIES]; // массив структур фильмов
+    int n; // количество фильмов в магазине
+    string search_title; // название фильма для поиска
+
+    // ввод данных о фильмах
+    cout << "Введите количество фильмов в магазине (не более " << MAX_MOVIES << "): ";
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cout << "Введите данные о фильме " << i+1 << ":" << endl;
+        cout << "Название: ";
+        cin >> movies[i].title;
+        cout << "Режиссер: ";
+        cin >> movies[i].director;
+        cout << "Жанр: ";
+        cin >> movies[i].genre;
+        cout << "Рейтинг популярности (от 1 до 10): ";
+        cin >> movies[i].rating;
+        cout << "Цена диска: ";
+        cin >> movies[i].price;
+    }
+
+    // поиск фильма по названию
+    cout << "Введите название фильма для поиска: ";
+    cin >> search_title;
+    bool found = false;
+    for (int i = 0; i < n; i++) {
+        if (movies[i].title == search_title) {
+            cout << "Найден фильм:" << endl;
+            cout << "Название: " << movies[i].title << endl;
+            cout << "Режиссер: " << movies[i].director << endl;
+            cout << "Жанр: " << movies[i].genre << endl;
+            cout << "Рейтинг популярности: " << movies[i].rating << endl;
+            cout << "Цена диска: " << movies[i].price << endl;
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Фильм с названием \"" << search_title << "\" не найден." << endl;
+    }
+
+    return 0;
+}
