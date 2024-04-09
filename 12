@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+int massive[2];
+int middle(int massive[2]){
+    int res = 0;
+    res = (massive[0] + massive[1]) / 2;
+    return res;
+}
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    massive[0] = 5;
+    massive[1] = 12;
+    cout << "Среднее арифметическое массива является = " << middle(massive);
+}
