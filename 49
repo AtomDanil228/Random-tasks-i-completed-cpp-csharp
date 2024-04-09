@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int level = Int32.Parse(Console.ReadLine());
+            switch (level)
+            {
+                case 0:
+                    Console.WriteLine("Уровень 0");
+                    break;
+                case 1:
+                    goto case 2;
+                case 2:
+                    Console.WriteLine("Уровень от 1 до 2");
+                    goto default;
+                default:
+                    Console.WriteLine("Завершение");
+                    break;
+            }
+        }
+    }
+}
