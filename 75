@@ -1,0 +1,16 @@
+#include <iostream>
+#include <windows.h>
+#include <string>
+using namespace std;
+int main() {
+    string resume = "Это - краткое резюме. Здесь можно рассказать о своем опыте, образовании и навыках.";
+    size_t part1Length = resume.length() / 3;
+    size_t part2Length = resume.length() / 3;
+    size_t part3Length = resume.length() - part1Length - part2Length;
+    MessageBoxA(nullptr, resume.substr(0, part1Length).c_str(), "Резюме - Часть 1", MB_OK);
+    MessageBoxA(nullptr, resume.substr(part1Length, part2Length).c_str(), "Резюме - Часть 2", MB_OK);
+    MessageBoxA(nullptr, resume.substr(part1Length + part2Length, part3Length).c_str(), "Резюме - Часть 3", MB_OK);
+    size_t averageLength = resume.length() / 3;
+    string averageMessage = "Среднее количество символов на странице: " + to_string(averageLength);
+    MessageBoxA(nullptr, averageMessage.c_str(), "Среднее количество символов", MB_OK);
+}
