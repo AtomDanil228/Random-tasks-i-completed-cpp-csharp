@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+const string pizzas[] = { "Маргарита", "Пепперони", "Гавайская", "Четыре сыра" };
+const double pizza_prices[] = { 10.99, 12.99, 11.99, 13.99 };
+const string drinks[] = { "Кока-кола", "Пепси", "Фанта" };
+const double drink_prices[] = { 1.99, 1.99, 2.49 };
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    int pizza_choice, drink_choice, quantity;
+    double total = 0;
+
+    cout << "Меню пицц:" << endl;
+    for (int i = 0; i < 4; i++) {
+        cout << i + 1 << ". " << pizzas[i] << " - $" << pizza_prices[i] << endl;
+    }
+
+    cout << "Выберите номер пиццы (1-4): ";
+    cin >> pizza_choice;
+    cout << "Сколько штук: ";
+    cin >> quantity;
+    total += pizza_prices[pizza_choice - 1] * quantity;
+
+    if (pizza_choice % 5 == 0) {
+        cout << "Поздравляем, вы получили одну бесплатную пиццу!" << endl;
+    }
+
+    cout << "Меню напитков:" << endl;
+    for (int i = 0; i < 3; i++) {
+        cout << i + 1 << ". " << drinks[i] << " - $" << drink_prices[i] << endl;
+    }
+
+    cout << "Выберите номер напитка (1-3): ";
+    cin >> drink_choice;
+    cout << "Сколько бутылок: ";
+    cin >> quantity;
+    total += drink_prices[drink_choice - 1] * quantity;
+
+    if (drink_prices[drink_choice - 1] > 2 && quantity > 3) {
+        total *= 0.85;
+        cout << "Вы получили скидку 15% на напитки!" << endl;
+    }
+
+    if (total > 50) {
+        total *= 0.8;
+        cout << "Вы получили скидку 20% на весь заказ!" << endl;
+    }
+
+    cout << "---------------------------" << endl;
+    cout << "Чек:" << endl;
+    cout << pizzas[pizza_choice - 1] << " - " << quantity << " - $" << pizza_prices[pizza_choice - 1] * quantity << endl;
+    cout << drinks[drink_choice - 1] << " - " << quantity << " - $" << drink_prices[drink_choice - 1] * quantity << endl;
+    cout << "Итого к оплате: $" << total << endl;
+
+    return 0;
+}
