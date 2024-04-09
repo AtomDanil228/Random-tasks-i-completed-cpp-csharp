@@ -1,0 +1,46 @@
+using System;
+
+namespace ConsoleApp4
+{
+    class booli
+    {
+        private bool value;
+        public booli(bool value)
+        {
+            this.value = value;
+        }
+        public static bool operator true(booli b)
+        {
+            return b.value;
+        }
+        public static bool operator false(booli b)
+        {
+            return !b.value;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            booli atrue = new booli(true);
+            booli afalse = new booli(false);
+            if (atrue)
+            {
+                Console.WriteLine("atrue is true");
+            }
+            else
+            {
+                Console.WriteLine("atrue is false");
+            }
+            if (afalse)
+            {
+                Console.WriteLine("afalse is true");
+            }
+            else
+            {
+                Console.WriteLine("afalse is false");
+            }
+        }
+    }
+}
