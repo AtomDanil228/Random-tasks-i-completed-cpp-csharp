@@ -1,0 +1,35 @@
+using System;
+
+namespace ConsoleApp4
+{
+    class mynumber
+    {
+        private int value;
+        public mynumber(int value)
+        {
+            this.value = value;
+        }
+        public static mynumber operator ++(mynumber num)
+        {
+            return new mynumber(num.value+1);
+        }
+        public void print()
+        {
+            Console.WriteLine("Значение: " + value);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            mynumber num1 = new mynumber(5);
+            Console.WriteLine("Исходное значение num1:");
+            num1.print();
+            mynumber num2 = ++num1;
+            Console.WriteLine("Значение после инкремента num1:");
+            num1.print();
+            Console.WriteLine("Значение после инкремента и присваивания num2:");
+            num2.print();
+        }
+    }
+}
