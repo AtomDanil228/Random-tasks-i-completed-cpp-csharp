@@ -1,0 +1,151 @@
+22.01.2023
+Многомерные массивы
+
+Задание 1
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    const int x = 3; const int y = 3; int userNum = 0, a = 0;
+    int massive1[x][y]{ 0, 0, 0, 0, 0, 0 };
+    cout << "Введите число.\n"; cin >> userNum;
+    massive1[0][0] = userNum;
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            if (i == 0 and j == 0) { continue; };
+            massive1[i][j] = massive1[i][j - 1] * 2;
+        };
+    }; for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            cout << massive1[i][j] << " ";
+        };
+        cout << "\n";
+    };
+}
+
+
+Задание 2
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    const int x = 3; const int y = 3; int userNum = 0, a = 0;
+    int massive1[x][y]{ 0, 0, 0, 0, 0, 0 };
+    cout << "Введите число.\n"; cin >> userNum;
+    massive1[0][0] = userNum;
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            if (i == 0 and j == 0) { continue; };
+            massive1[i][j] = massive1[i][j - 1] + 1;
+        };
+    }; for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            cout << massive1[i][j] << " ";
+        };
+        cout << "\n";
+    };
+}
+
+
+Задание 3
+
+#include <iostream>
+#include <stdlib.h> 
+#include <time.h>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "rus"); srand(time(NULL));
+    const int x = 4, y = 6, min = 0, max = 9; int massive1[x][y],saveStroka[y], side = 0, times = 0, lastNum = 0;
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            massive1[i][j] = min + rand() % (max - min + 1);
+        };
+    }; for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            cout << massive1[i][j] << " ";
+        };
+        cout << endl;
+    }; cout << endl << endl;
+    massive1[x - 1][y - 1];
+    cout << "В какую сторону хочешь сдвинуть массив?\n0 - Вверх\n1 - Вниз\n2 - Влево\n3 - Вправо\n"; cin >> side;
+    cout << "Сколько раз хочешь сдвинуть массив в выбранную сторону?\n"; cin >> times;
+    //i = строка j = столбец
+    switch (side) {
+    case 0:
+        for (int l = 0; l < times; l++) {
+            for (int i = 0; i < x; i++) {
+                if (i == 0) {
+                    for (int j = 0; j < y; j++) {
+                        saveStroka[j] = massive1[i][j];
+                    };
+                };
+                if (i == x - 1) {
+                    for (int j = 0; j < y; j++) {
+                        massive1[i][j] = saveStroka[j];
+                    };
+                    break;
+                };
+                for (int j = 0; j < y; j++) {
+                    massive1[i][j] = massive1[i + 1][j];
+                };
+            };
+        };
+        break;
+    case 1:
+        for (int l = 0; l < times; l++) {
+            for (int i = x; i >= 0; i--) {
+                if (i == x) {
+                    for (int j = 0; j < y; j++) {
+                        saveStroka[j] = massive1[x - 1][j];
+                    };
+                };
+                if (i == 0) {
+                    for (int j = 0; j < y; j++) {
+                        massive1[0][j] = saveStroka[j];
+                    };
+                    break;
+                };
+                for (int j = 0; j < y; j++) {
+                    massive1[i - 1][j] = massive1[i - 2][j];
+                };
+            };
+        };
+        break;
+    case 2:
+        for (int l = 0; l < times; l++) {
+            for (int i = 0; i < x; i++) {
+                lastNum = massive1[i][0];
+                for (int j = 0; j < y; j++) {
+                    massive1[i][j] = massive1[i][j + 1];
+                };
+                massive1[i][y - 1] = lastNum;
+            };
+        };
+        break;
+    case 3:
+        for (int l = 0; l < times; l++) {
+            for (int i = 0; i < x; i++) {
+                lastNum = massive1[i][y - 1];
+                for (int j = y - 1; j >= 0; j--) {
+                    massive1[i][j] = massive1[i][j - 1];
+                };
+                massive1[i][0] = lastNum;
+            };
+        };
+        break;
+    default:
+        cout << "ERROR\n";
+        break;
+    }
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            cout << massive1[i][j] << " ";
+        };
+        cout << endl;
+    };
+}
