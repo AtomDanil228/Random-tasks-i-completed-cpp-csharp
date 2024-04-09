@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 0;
+            while (true)
+            {
+                if(++i % 6 == 0)
+                {
+                    Console.Write(i + " ");
+                }
+                if(i == 100)
+                {
+                    break;
+                }
+            }
+        }
+    }
+}
