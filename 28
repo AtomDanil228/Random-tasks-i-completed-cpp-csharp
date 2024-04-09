@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    int choice, number;
+    int digits = 0;
+    int sum = 0;
+    int count = 0;
+    int zeros = 0;
+    double average = 0;
+    do {
+        cout << "Выберите операцию:" << endl;
+        cout << "1. Определить количество цифр" << endl;
+        cout << "2. Посчитать сумму цифр" << endl;
+        cout << "3. Посчитать среднее арифметическое цифр" << endl;
+        cout << "4. Определить количество нулей" << endl;
+        cout << "5. Выход" << endl;
+        cout << ">> ";
+        cin >> choice;
+        switch (choice) {
+        case 1:
+            cout << "Введите число: ";
+            cin >> number;
+            while (number != 0) {
+                ++digits;
+                number /= 10;
+            }
+            cout << "Количество цифр: " << digits << endl;
+            break;
+        case 2:
+            cout << "Введите число: ";
+            cin >> number;
+            while (number != 0) {
+                sum += number % 10;
+                number /= 10;
+            }
+            cout << "Сумма цифр: " << sum << endl;
+            break;
+        case 3:
+            cout << "Введите число: ";
+            cin >> number;
+            while (number != 0) {
+                ++count;
+                average += number % 10;
+                number /= 10;
+            }
+            average /= count;
+            cout << "Среднее арифметическое цифр: " << average << endl;
+            break;
+        case 4:
+            cout << "Введите число: ";
+            cin >> number;
+            while (number != 0) {
+                if (number % 10 == 0) {
+                    ++zeros;
+                }
+                number /= 10;
+            }
+            cout << "Количество нулей: " << zeros << endl;
+            break;
+        case 5:
+            cout << "До свидания!" << endl;
+            break;
+        default:
+            cout << "Ошибка: неверный выбор!" << endl;
+            break;
+        }
+    } while (choice != 5);
+    return 0;
+}
