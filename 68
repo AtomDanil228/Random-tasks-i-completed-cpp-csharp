@@ -1,0 +1,35 @@
+using System;
+
+namespace ConsoleApp4
+{
+    class mynumber
+    {
+        private int value;
+        public mynumber(int value)
+        {
+            this.value = value;
+        }
+        public static mynumber operator +(mynumber num1, mynumber num2)
+        {
+            return new mynumber(num1.value + num2.value);
+        }
+        public void print()
+        {
+            Console.WriteLine("Значение: " + value);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            mynumber num1 = new mynumber(5);
+            mynumber num2 = new mynumber(10);
+            Console.WriteLine("Znachenie num1:");
+            num1.print();
+            Console.WriteLine("Znachenie num2:");
+            num2.print();
+            mynumber sum = num1 + num2;
+            sum.print();
+        }
+    }
+}
