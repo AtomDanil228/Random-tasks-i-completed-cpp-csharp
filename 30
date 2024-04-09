@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    const int MAX_NAME_LENGTH = 20;
+    const int MAX_ORDER_SIZE = 5;
+    const int MAX_MENU_ITEMS = 5;
+    const double PRICES[MAX_MENU_ITEMS] = { 1.5, 2.0, 2.5, 3.0, 3.5 };
+    const char MENU_ITEMS[MAX_MENU_ITEMS][MAX_NAME_LENGTH] = {
+        "Кофе", "Чай", "Сендвич", "Торт", "Смузи"
+    };
+
+    int num_people = 0;
+    cout << "Введите количество человек: ";
+    cin >> num_people;
+
+    cout << "1 - Кофе, 2 - Чай, 3 - Сендвич, 4 - Торт, 5 - Смузи\n";
+
+    double total_bill = 0.0;
+    for (int i = 1; i <= num_people; ++i)
+    {
+        cout << "Покупатель " << i << ", Выберите свой заказ (до " << MAX_ORDER_SIZE << " вещей):" << endl;
+
+        int num_items = 0;
+        double person_bill = 0.0;
+        int order[MAX_ORDER_SIZE] = { 0 };
+
+        for (int j = 0; j < MAX_ORDER_SIZE; ++j)
+        {
+            cout << "Вещь " << (j + 1) << ": ";
+            int item = 0;
+            cin >> item;
+
+            if (item < 1 || item > MAX_MENU_ITEMS)
+            {
+                cout << "Неверный номер вещи." << endl;
+                --j;
+                continue;
+            }
+
+            order[j] = item;
+            person_bill += PRICES[item - 1];
+            ++num_items;
+
+            cout << "Хотите добавить ещё? (y/n): ";
+            char response = 'n';
+            cin >> response;
+            if (response != 'y' && response != 'Y')
+                break;
+        }
+
+        cout << "Покупатель " << i << ", Ваш заказ:" << endl;
+        for (int j = 0; j < num_items; ++j)
+            cout << MENU_ITEMS[order[j] - 1] << " - $" << PRICES[order[j] - 1] << endl;
+
+        cout << "Покупатель " << i << ", Ваш заказ стоит $" << person_bill << endl;
+        total_bill += person_bill;
+    }
+
+    cout << "Сумма всех заказов $" << total_bill << endl;
+
+    return 0;
+}
