@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = { 1, 2, 3, 4, 5 };
+            Console.WriteLine("Пример с массивом");
+            foreach(int i in numbers)
+            {
+                Console.Write(i + " ");
+            }
+            List<string> fruits = new List<string> { "яблоко", "банан", "апельсин" };
+            Console.WriteLine("Пример с коллекцией");
+            foreach(string i in fruits)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}
