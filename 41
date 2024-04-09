@@ -1,0 +1,26 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+int main()
+{
+    stack<int> myStack;
+    myStack.push(10);
+    myStack.push(20);
+    myStack.push(30);
+    cout<< "Top element "<<myStack.top()<<endl;
+    cout<< "Size nachalnoe = "<<myStack.size()<<endl;
+    if(myStack.empty()){
+        cout<< "Stack is empty"<<endl;
+    }
+    else{
+        cout<< "Stack is not empty"<<endl;
+    }
+    myStack.pop();
+    cout<< "Size = "<<myStack.size()<<endl;
+    cout<<"Elementi steka: "<<endl;
+    while(!myStack.empty()){
+        cout<<myStack.top()<<" ";
+        myStack.pop();
+    }
+    cout<<endl;
+}
