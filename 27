@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    int k;
+    cout << "Введите номер варианта: ";
+    cin >> k;
+
+    cout << "Таблица умножения на " << k << ":" << endl;
+    for (int i = 1; i <= 10; ++i) {
+        cout << k << " x " << i << " = " << k * i << endl;
+    }
+
+    return 0;
+}
