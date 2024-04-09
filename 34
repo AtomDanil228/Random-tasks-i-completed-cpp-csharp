@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    const int SIZE = 10;
+    int arr[SIZE] = { 5, 7, 3, 1, 9, 2, 8, 4, 6, 0 };
+    int minElem, maxElem;
+    minElem = arr[0];
+    for (int i = 1; i < SIZE; i++)
+    {
+        if (arr[i] < minElem)
+        {
+            minElem = arr[i];
+        }
+    }
+    maxElem = arr[0];
+    for (int i = 1; i < SIZE; i++)
+    {
+        if (arr[i] > maxElem)
+        {
+            maxElem = arr[i];
+        }
+    }
+    cout << "Минимальный элемент: " << minElem << endl;
+    cout << "Максимальный элемент: " << maxElem << endl;
+}
