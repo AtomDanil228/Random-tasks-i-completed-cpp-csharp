@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+using namespace std;
+int main() {
+    cout << "Enter the path to the Unicode file: ";
+    string filePath;
+    cin >> filePath;
+    ifstream file(filePath);
+    if (!file.is_open()) {
+        cerr << "Unable to open the file." << endl;
+        return 1;
+    }
+    vector<string> fruits = { "apple", "orange", "banana", "grape", "melon" };
+    size_t fruitCount = 0;
+    string line;
+    while (getline(file, line)) {
+        for (const auto& fruit : fruits) {
+            size_t pos = line.find(fruit);
+            if (pos != string::npos) {
+                ++fruitCount;
+                line.erase(pos, fruit.length());
+            }
+        }
+    }
+    file.close();
+    cout << "Number of fruit names found: " << fruitCount << endl;
+}
