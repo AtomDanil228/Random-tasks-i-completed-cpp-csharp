@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+int calculate(int num, int stepenj) {
+    int result = 1;
+    for (int i = 0; i < stepenj; i++) {
+        result = result * num;
+    };
+    return result;
+}
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    int num = 3; int stepenj = 7;
+    cout << calculate(num, stepenj);
+}
