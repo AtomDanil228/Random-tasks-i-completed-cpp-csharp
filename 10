@@ -1,0 +1,67 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+void printHorizontalLine(char symbol, int length, int speed)
+{
+    for (int i = 0; i < length; i++)
+    {
+        cout << symbol;
+        if (speed == 1)
+        {
+            Sleep(50);
+        }
+        else if (speed == 2)
+        {
+            Sleep(100);
+        }
+        else if (speed == 3)
+        {
+            Sleep(200);
+        }
+    }
+    cout << endl;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    char symbol;
+    int length, speed, direction;
+
+    cout << "Выберите символ для линии: ";
+    cin >> symbol;
+    cout << "Выберите длину линии: ";
+    cin >> length;
+    cout << "Выберите направление линии (1 - горизонтальное, 2 - вертикальное): ";
+    cin >> direction;
+    cout << "Выберите скорость вывода (1 - быстро, 2 - нормально, 3 - медленно): ";
+    cin >> speed;
+
+    if (direction == 1)
+    {
+        printHorizontalLine(symbol, length, speed);
+    }
+    else if (direction == 2)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            cout << symbol << endl;
+            if (speed == 1)
+            {
+                Sleep(50);
+            }
+            else if (speed == 2)
+            {
+                Sleep(100);
+            }
+            else if (speed == 3)
+            {
+                Sleep(200);
+            }
+        }
+    }
+
+    return 0;
+}
