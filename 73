@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+    cout << "Enter the path to the Unicode file: ";
+    string inputFilePath;
+    cin >> inputFilePath;
+    ifstream inputFile(inputFilePath, ios::binary);
+    if (!inputFile.is_open()) {
+        cerr << "Unable to open the input file." << endl;
+        return 1;
+    }
+    cout << "Enter the path to the ANSI file: ";
+    string outputFilePath;
+    cin >> outputFilePath;
+    ofstream outputFile(outputFilePath, ios::binary);
+    if (!outputFile.is_open()) {
+        cerr << "Unable to open the output file." << endl;
+        return 1;
+    }
+    outputFile << inputFile.rdbuf();
+    inputFile.close();
+    outputFile.close();
+    cout << "Conversion completed successfully." << endl;
+}
