@@ -1,0 +1,69 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+class Student {
+private:
+    string name;
+    int mathScore;
+    int informaticsScore;
+    int programmingScore;
+    int databaseScore;
+public:
+    // Конструктор класса
+    Student(const string& name) : name(name) {
+        mathScore = 0;
+        informaticsScore = 0;
+        programmingScore = 0;
+        databaseScore = 0;
+    }
+    // Метод для установки оценки по предмету
+    void setScore(const string& subject, int score) {
+        if (subject == "math") {
+            mathScore = score;
+        }
+        else if (subject == "informatics") {
+            informaticsScore = score;
+        }
+        else if (subject == "programming") {
+            programmingScore = score;
+        }
+        else if (subject == "database") {
+            databaseScore = score;
+        }
+    }
+    // Метод для сохранения таблицы успеваемости в файл
+    void saveGrades(const string& filename) {
+        ofstream file(filename);
+        if (!file) {
+            cerr << "Не удалось открыть файл для записи." << endl;
+            return;
+        }
+        file << "Студент: " << name << endl;
+        file << "---------------------------" << endl;
+        file << "Предмет\t\tОценка" << endl;
+        file << "---------------------------" << endl;
+        file << "Математика:\t\t" << mathScore << endl;
+        file << "Информатика:\t\t" << informaticsScore << endl;
+        file << "Программирование:\t" << programmingScore << endl;
+        file << "Базы данных:\t\t" << databaseScore << endl;
+        file << "---------------------------" << endl;
+        file.close();
+        cout << "Таблица успеваемости успешно сохранена в файл." << endl;
+    }
+
+
+};
+
+int main() {
+    // Создание объекта студента
+    Student student("Иван Иванов");
+    // Установка оценок по предметам
+    student.setScore("math", 5);
+    student.setScore("informatics", 4);
+    student.setScore("programming", 5);
+    student.setScore("database", 3);
+    // Сохранение таблицы успеваемости в файл
+    student.saveGrades("grades.txt");
+    return 0;
+}
