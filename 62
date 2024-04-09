@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int main() {
+    // Инициализация генератора случайных чисел
+    srand(time(0));
+
+    // Создание массива из 10 случайных чисел
+    int array[10];
+    for (int i = 0; i < 10; i++) {
+        array[i] = std::rand();
+    }
+
+    // Открытие файла для записи
+    ofstream file("numbers.txt");
+
+    // Проверка, удалось ли открыть файл
+    if (!file) {
+        cerr << "Не удалось открыть файл." << endl;
+        return 1;
+    }
+
+    // Запись чисел в файл
+    for (int i = 0; i < 10; i++) {
+        file << array[i] << std::endl;
+    }
+
+    // Закрытие файла
+    file.close();
+
+    cout << "Числа успешно записаны в файл." << std::endl;
+
+    return 0;
+}
