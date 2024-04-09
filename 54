@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 30, 10, 20, 40, 50, 30 };
+            int search = 30;
+            int index = Array.LastIndexOf(arr, search);
+            if(index >= 0)
+            {
+                Console.WriteLine("Index = " + index);
+            }
+            else
+            {
+                Console.WriteLine("Index not found");
+            }
+        }
+    }
+}
