@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    const int N = 10;
+    double arr[N];
+    for (int i = 0; i < N; i++) {
+        arr[i] = (rand() % 21) - 10;
+    }
+    double sum_neg = 0;
+    for (int i = 0; i < N; i++) {
+        if (arr[i] < 0) {
+            sum_neg += arr[i];
+        }
+    }
+    cout << "Сумма отрицательных элементов: " << sum_neg << endl;
+    int min_idx = 0, max_idx = 0;
+    for (int i = 1; i < N; i++) {
+        if (arr[i] < arr[min_idx]) {
+            min_idx = i;
+        }
+        if (arr[i] > arr[max_idx]) {
+            max_idx = i;
+        }
+    }
+    double prod = 1;
+    int start, end;
+    if (min_idx < max_idx) {
+        start = min_idx + 1;
+        end = max_idx;
+    }
+    else {
+        start = max_idx + 1;
+        end = min_idx;
+    }
+    for (int i = start; i < end; i++) {
+        prod *= arr[i];
+    }
+    cout << "Произведение элементов между min и max: " << prod << endl;
+    prod = 1;
+    for (int i = 0; i < N; i += 2) {
+        prod *= arr[i];
+    }
+    cout << "Произведение элементов с четными номерами: " << prod << endl;
+    double sum_neg_between = 0;
+    int first_neg_idx = -1, last_neg_idx = -1;
+    for (int i = 0; i < N; i++) {
+        if (arr[i] < 0) {
+            if (first_neg_idx == -1) {
+                first_neg_idx = i;
+            }
+            last_neg_idx = i;
+        }
+    }
+    if (first_neg_idx != -1 && last_neg_idx != -1 && last_neg_idx > first_neg_idx) {
+        for (int i = first_neg_idx + 1; i < last_neg_idx; i++) {
+            sum_neg_between += arr[i];
+        }
+    }
+    cout << "Сумма элементов между первым и последним отрицательными элементами: " << sum_neg_between << endl;
+}
