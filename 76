@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    srand(static_cast<unsigned int>(time(nullptr)));
+    int targetNumber = rand() % 100 + 1;
+    int attempts = 0;
+    int userGuess;
+    do {
+        cout << "Угадайте число от 1 до 100: ";
+        cin >> userGuess;
+        if (cin.fail()) {
+            cerr << "Ошибка ввода. Пожалуйста, введите целое число." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        attempts++;
+        if (userGuess < targetNumber) {
+            cout << "Загаданное число больше." << endl;
+        }
+        else if (userGuess > targetNumber) {
+            cout << "Загаданное число меньше." << endl;
+        }
+        else {
+            cout << "Поздравляем! Вы угадали число " << targetNumber << " за " << attempts << " попыток." << endl;
+        }
+
+    } while (attempts < 10 && targetNumber != userGuess);
+    cout << "Хотите сыграть еще раз? (y/n): ";
+    char playAgain;
+    cin >> playAgain;
+    if (playAgain == 'y' || playAgain == 'Y') {
+        main();
+    }
+    else {
+        cout << "Спасибо за игру! До свидания." << endl;
+    }
+}
