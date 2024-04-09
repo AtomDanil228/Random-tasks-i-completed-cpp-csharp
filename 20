@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+using namespace std;
+struct task {
+    string name;
+    int priority;
+    string description;
+    int year;
+    int month;
+    int day;
+    int completionDate;
+    int print() {
+        cout << name << endl << priority << endl << description << endl << year << endl << month << endl << day << endl << completionDate << endl;
+        return 0;
+    }
+};
+int main()
+{
+    setlocale(LC_ALL, "rus"); int choice = 0;
+    cout << "Выберите действие\n0 - Выход\n1 - Добавление дела\n2 - Удаление дела\n3 - Редактирование дела\n4 - Поиск дел\n\n";
+    cin >> choice;
+    if (choice >= 0 and choice <= 4)
+        switch (choice) {
+        case '0':
+            cout << "Выход...";
+            break;
+        case '1':
+            cout << "Введите название дела\n";     string name;                  cin >> name;
+            cout << "Определите приоритет дела\n"; int priority = 0;             cin >> priority;
+            cout << "Напишите описание дела\n";    string description;           cin >> description;
+            cout << "Введите дату\n\n";            int year; int month; int day;
+            cout << "Год:";       cin >> year;
+            cout << "\nМесяц:";   cin >> month;
+            cout << "\nДень:";    cin >> day;
+            cout << "\nВведите время исполнения\n"; int completionDate; cin >> completionDate;
+            task one{name,priority,description,year,month,day,completionDate};
+            one.print();
+            break;
+        case '2':
+
+            break;
+        case '3':
+
+            break;
+        case '4':
+
+            break;
+        }
+    else
+        cout << "ERROR\n";
+}
