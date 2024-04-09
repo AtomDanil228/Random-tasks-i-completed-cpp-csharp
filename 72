@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <limits>
+#include <string>
+using namespace std;
+int main() {
+    ifstream file("your_file.txt");
+    if (!file.is_open()) {
+        cerr << "Unable to open the file." << endl;
+        return 1;
+    }
+    unsigned int maxLength = 0;
+    unsigned int minLength = numeric_limits<unsigned int>::max();
+    unsigned int totalLength = 0;
+    unsigned int lineCount = 0;
+    string line;
+    while (getline(file, line)) {
+        unsigned int length = line.size();
+        if (length > maxLength) {
+            maxLength = length;
+        }
+        if (length < minLength) {
+            minLength = length;
+        }
+        totalLength += length;
+        ++lineCount;
+    }
+    file.close();
+    if (lineCount == 0) {
+        cerr << "The file is empty." << endl;
+        return 1;
+    }
+    double averageLength = static_cast<double>(totalLength) / lineCount;
+    cout << "Max Length: " << maxLength << " bytes" << endl;
+    cout << "Min Length: " << minLength << " bytes" << endl;
+    cout << "Average Length: " << averageLength << " bytes" << endl;
+}
