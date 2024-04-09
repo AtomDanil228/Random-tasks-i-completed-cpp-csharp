@@ -1,0 +1,32 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+           Console.Write("Massiv: " + arr1);
+            int [] arr2 = ((int[]) arr1.Clone());
+            Console.Write("\n");
+            foreach(int i in arr2)
+            {
+                Console.Write(i + " ");
+            }
+            Array.Reverse(arr1, 3, 4);
+            Console.Write("\n");
+            foreach (int i in arr1)
+            {
+                Console.Write(i + " ");
+            }
+            Console.Write("\n");
+            int[] arr3 = new int[20];
+            arr1.CopyTo(arr3, 5);
+            foreach (int i in arr3)
+            {
+                Console.Write(i + " ");
+            }
+        }
+    }
+}
