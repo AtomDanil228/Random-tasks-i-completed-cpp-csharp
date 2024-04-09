@@ -1,0 +1,44 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+class Worker {
+private:
+    string name;
+    string birthDate;
+    string profession;
+public:
+    // Конструктор класса
+    Worker(const std::string& name, const std::string& birthDate, const std::string& profession)
+        : name(name), birthDate(birthDate), profession(profession) {}
+
+    // Метод для сохранения данных о работнике в файл
+    void saveToFile(const std::string& filename) {
+        ofstream file(filename);
+
+        if (!file) {
+            cerr << "Не удалось открыть файл для записи." << std::endl;
+            return;
+        }
+
+        file << "Имя: " << name << std::endl;
+        file << "Дата рождения: " << birthDate << std::endl;
+        file << "Профессия: " << profession << std::endl;
+
+        file.close();
+
+        cout << "Данные о работнике успешно записаны в файл." << std::endl;
+    }
+
+
+};
+
+int main() {
+    // Создание объекта работника
+    Worker worker("Иван Иванов", "01.01.1990", "Инженер");
+
+    // Сохранение данных о работнике в файл
+    worker.saveToFile("worker.txt");
+
+    return 0;
+}
