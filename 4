@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int function(int n)
+{
+    if (n == 1 or n == 2)
+        return true;
+    else {
+        for (int i = 2; i < n; ++i)
+        {
+            if (n % i == 0)
+                return false;
+        }
+        return true;
+    }
+}
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    int number = 7;
+    int func = function(number);
+    if (func == true)
+        cout << "Число " << number << " является простым.";
+    else
+        cout << "Число " << number << " НЕ является простым.";
+}
