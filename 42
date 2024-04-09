@@ -1,0 +1,30 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+bool isPalindrome(const string& str)
+{
+    stack<char> charStack;
+    for(char c: str){
+        charStack.push(c);
+    }
+    for(char c: str){
+        if(c!= charStack.top()){
+            return false;
+        }
+        charStack.pop();
+    }
+    return true;
+}
+int main()
+{
+    string str;
+    cout<<"Vvedi stroku\n";
+    cin >> str;
+    if(isPalindrome(str)){
+        cout<<"Stroka - palindrom"<<endl;
+    }
+    else{
+        cout<<"Stroka ne palindrom"<<endl;
+    }
+}
