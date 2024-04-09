@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+int main() {
+    // Инициализация строки
+    string str = "Пример строки для записи в файл";
+
+    // Открытие файла для записи
+    ofstream file("text.txt");
+
+    // Проверка, удалось ли открыть файл
+    if (!file) {
+        cerr << "Не удалось открыть файл." << endl;
+        return 1;
+    }
+
+    // Запись строки в файл
+    file << str;
+
+    // Закрытие файла
+    file.close();
+
+    cout << "Строка успешно записана в файл." << endl;
+
+    return 0;
+}
