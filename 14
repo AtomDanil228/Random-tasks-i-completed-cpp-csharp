@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int massive[3]{ 29,4,2021 }; int massive2[3]{11,2,2023};
+int count(int massive[3], int massive2[3]) {
+    int res = 0;
+    if (massive[0] < massive2[0])
+        res = massive2[0] - massive[0];
+    else
+        res = massive[0] - massive2[0];
+    cout << "Разница в днях = " << res << endl;
+    if (massive[3] % 4 == 0)
+        cout << "Год 1 даты является високосным\n";
+    else
+        cout << "Год 1 даты не является високосным\n";
+    return 0;
+}
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    count(massive, massive2);
+}
