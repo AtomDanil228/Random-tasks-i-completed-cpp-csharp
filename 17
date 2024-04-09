@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    int num;
+    cout << "Введите четырехзначное число: ";
+    cin >> num;
+
+    if (num < 1000 || num > 9999) {
+        cout << "Ошибка: число не четырехзначное.\n";
+        return 0;
+    }
+
+    int digit1 = num / 1000;   // первая цифра
+    int digit2 = (num / 100) % 10;  // вторая цифра
+    int digit3 = (num / 10) % 10;  // третья цифра
+    int digit4 = num % 10;    // четвертая цифра
+
+    int new_num = digit2 * 1000 + digit1 * 100 + digit4 * 10 + digit3;  // новое число
+
+    cout << "Измененное число: " << new_num << "\n";
+
+    return 0;
+}
