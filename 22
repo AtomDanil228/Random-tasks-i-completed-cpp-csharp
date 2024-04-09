@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    int sales1, sales2, sales3;
+    double salary1, salary2, salary3;
+    cout << "Введите уровень продаж для менеджера 1: "; cin >> sales1;
+    cout << "Введите уровень продаж для менеджера 2: "; cin >> sales2;
+    cout << "Введите уровень продаж для менеджера 3: "; cin >> sales3;
+    salary1 = 200 + (sales1 < 500 ? sales1 * 0.03 : (sales1 < 1000 ? sales1 * 0.05 : sales1 * 0.08));
+    salary2 = 200 + (sales2 < 500 ? sales2 * 0.03 : (sales2 < 1000 ? sales2 * 0.05 : sales2 * 0.08));
+    salary3 = 200 + (sales3 < 500 ? sales3 * 0.03 : (sales3 < 1000 ? sales3 * 0.05 : sales3 * 0.08));
+    cout << "Зарплата менеджера 1: " << salary1 << "$" << endl;
+    cout << "Зарплата менеджера 2: " << salary2 << "$" << endl;
+    cout << "Зарплата менеджера 3: " << salary3 << "$" << endl;
+    if (salary1 > salary2 and salary1 > salary3) {
+        cout << "Лучший менеджер: 1" << endl;
+        salary1 += 200;
+    }else if (salary2 > salary1 and salary2 > salary3) {
+        cout << "Лучший менеджер: 2" << endl;
+        salary2 += 200;
+    }else {
+        cout << "Лучший менеджер: 3" << endl;
+        salary3 += 200;
+    }cout << "Зарплата менеджера 1 c премией: " << salary1 << "$" << endl;
+    cout << "Зарплата менеджера 2 c премией: " << salary2 << "$" << endl;
+    cout << "Зарплата менеджера 3 c премией: " << salary3 << "$" << endl;
+}
