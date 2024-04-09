@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+using namespace std;
+int main() {
+    ifstream inputFile("input.txt"); // Исходный файл
+    ofstream outputFile("output.txt"); // Файл для записи результатов
+
+    if (inputFile.is_open() && outputFile.is_open()) {
+        string line;
+        while (getline(inputFile, line)) {
+            istringstream iss(line);
+            string word;
+            while (iss >> word) {
+                if (word.length() >= 7) {
+                    outputFile << word << " ";
+                }
+            }
+        }
+
+        inputFile.close();
+        outputFile.close();
+        std::cout << "Файл успешно обработан.\n";
+    } else {
+        std::cout << "Не удалось открыть файлы.\n";
+    }
+
+    return 0;
+}
