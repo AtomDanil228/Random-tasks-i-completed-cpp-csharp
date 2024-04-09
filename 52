@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> myList = new List<int> { 1, 2, 3, 4, 5 };
+            Console.Write("Original list");
+            Console.Write("\n");
+            foreach( int i in myList){
+                Console.Write(i + " ");
+            }
+            myList.Clear();
+            Console.Write("\nList after clearning");
+            foreach (int i in myList)
+            {
+                Console.Write(i + " ");
+            }
+        }
+    }
+}
