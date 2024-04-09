@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 5, 2, 8, 3, 1, 4, 6 };
+            Console.WriteLine("original mass");
+            foreach(int i in arr)
+            {
+                Console.Write(i + " ");
+            }
+            Array.Sort(arr);
+            Console.WriteLine("\nSort Mass: ");
+            foreach (int i in arr)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine("\nMin = " + arr.Min());
+            Console.WriteLine("\nMax = " + arr.Max());
+        }
+    }
+}
