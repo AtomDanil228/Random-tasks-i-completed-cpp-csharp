@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+int calculate(int num, int num2) {
+    int result = 0;
+    for (int i = num; i <= num2; i++) {
+        result = result + i;
+    };
+    return result;
+}
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    int num = 5; int num2 = 26;
+    cout << calculate(num, num2);
+}
