@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class String {
+private:
+    static const size_t DEFAULT_SIZE = 80;
+    char* data;
+    size_t size;
+public:
+    String() : String(DEFAULT_SIZE) {}
+    explicit String(size_t size) : data(new char[size]), size(size) {}
+    String(const char* str) : String(strlen(str)) {
+        strcpy_s(data, size, str);
+    }
+    ~String() {
+        delete[] data;
+    }
+    void input() {
+        cout << "Enter a string: ";
+        cin.getline(data, static_cast<streamsize>(size));
+    }
+    void display() const {
+        cout << "String: " << data << endl;
+    }
+};
+int main() {
+    String defaultString;
+    defaultString.display();
+    String customSizeString(50);
+    customSizeString.input();
+    customSizeString.display();
+    String userInputString;
+    userInputString.input();
+    userInputString.display();
+}
