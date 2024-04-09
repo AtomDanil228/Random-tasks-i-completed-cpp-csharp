@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    int num;
+    cout << "Введите шестизначное число: ";
+    cin >> num;
+
+    if (num < 100000 || num > 999999) {
+        cout << "Ошибка: число не шестизначное.\n";
+        return 0;
+    }
+
+    int sum1 = num / 100000 + (num / 10000) % 10 + (num / 1000) % 10;  // Сумма первых трех цифр
+    int sum2 = (num / 100) % 10 + (num / 10) % 10 + num % 10;  // Сумма вторых трех цифр
+
+    if (sum1 == sum2) {
+        cout << "Число является счастливым.\n";
+    }
+    else {
+        cout << "Число не является счастливым.\n";
+    }
+
+    return 0;
+}
