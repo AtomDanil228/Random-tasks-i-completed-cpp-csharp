@@ -1,0 +1,39 @@
+using System;
+
+namespace ConsoleApp4
+{
+    class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public Person(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+        public static bool operator ==(Person person1, Person person2)
+        {
+            if (ReferenceEquals(person1, null) && ReferenceEquals(person2, null))
+                return true;
+            if (ReferenceEquals(person1, null) || ReferenceEquals(person2, null))
+                return false;
+                return person1.Name == person2.Name && person1.Age == person2.Age;
+        }
+        public static bool operator !=(Person person1, Person person2)
+        {
+            return !(person1 == person2);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Person person1 = new Person("Alice", 35);
+            Person person2 = new Person("Alice", 19);
+            bool areEqual = person1 == person2;
+            Console.WriteLine("person1 == person2 " + areEqual);
+            bool areEqual1 = person1 != person2;
+            Console.WriteLine("Pesron1 != person2 " + areEqual1);
+        }
+    }
+}
