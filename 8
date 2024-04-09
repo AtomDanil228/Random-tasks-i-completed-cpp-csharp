@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "rus"); int grades[10], num = 0, l = 0;
+    cout << "Введите 10 оценок\n"; for (int i = 0; i < 10; i++) {
+        cin >> grades[i]; if (grades[i] < 0 or grades[i] >12) { l++; cout << "ERROR"; break; }
+    }; for (;l < 1;) {
+        cout << "0 - Выход\n1 - Вывод оценок\n2 - Пересдача экзамена\n3 - Выходит ли стипендия\n"; int key;
+        cin >> key;
+        switch(key){
+        case 0:
+            l++;
+            break;
+        case 1:
+            for (int i = 0; i < 10; i++) { cout << grades[i] << "  "; }; break;
+        case 2:
+            cout << "Какой номер экзамена который был пересдан?\n"; cin >> num;
+            cout << "Введите новую оценку:\n"; cin >> grades[num-1]; num = 0;
+            if (grades[num - 1] < 0 or grades[num - 1] > 12) { l++; cout << "ERROR"; }
+            break;
+        case 3:
+            for (int i = 0; i < 10; i++) {
+                num = num + grades[i];
+            }; if (num / 10 >= 10.7)
+                cout << "Стипендия выходит.\n";
+            else
+                cout << "Стипендия не выходит\n";
+            num = 0;
+            break;
+        default:
+            cout << "Error\n";
+            break;
+        }
+    };
+}
